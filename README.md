@@ -2,6 +2,10 @@
 
 A simple REST API for managing bank customers and their transactions, built with **FastAPI** and **SQLAlchemy**.
 
+## Architecture
+
+![Architecture diagram showing the request flow from client to FastAPI to the data layer to the database](images/architecture.svg)
+
 ## Features
 
 - Create and list customers
@@ -18,23 +22,21 @@ A simple REST API for managing bank customers and their transactions, built with
 - [pytest](https://docs.pytest.org/) + [httpx](https://www.python-httpx.org/) — testing
 
 ## Project Structure
-
-```
 app/
-├── __init__.py
-├── main.py          # FastAPI app instance and router registration
-├── database.py       # DB engine/session setup
-├── models.py          # SQLAlchemy ORM models (Customer, Transaction)
-├── schemas.py          # Pydantic request/response schemas
-├── crud.py             # Database access functions
-├── dependencies.py     # Shared FastAPI dependencies
+├── init.py
+├── main.py # FastAPI app instance and router registration
+├── database.py # DB engine/session setup
+├── models.py # SQLAlchemy ORM models (Customer, Transaction)
+├── schemas.py # Pydantic request/response schemas
+├── crud.py # Database access functions
+├── dependencies.py # Shared FastAPI dependencies
 └── routers/
-    ├── customers.py    # /customers endpoints
-    └── transactions.py # /transactions endpoints
+├── customers.py # /customers endpoints
+└── transactions.py # /transactions endpoints
 
-test_banking_api.py     # API integration tests
+test_banking_api.py # API integration tests
 requirements.txt
-```
+
 
 > **Note:** This project expects to live inside an `app/` package (i.e. these files should be placed in a folder named `app/`, alongside a parent directory that contains `test_banking_api.py`).
 
@@ -57,12 +59,14 @@ pip install -r requirements.txt
 
 By default, the app connects to MySQL:
 
-```
 mysql+pymysql://root:minnie@localhost:3306/bank_management
-```
+
 
 You can override this with the `DATABASE_URL` environment variable. For example, to use SQLite instead:
 
+```bash
+export DATABASE_URL="sqlite:///./banking.db"
+```
 
 Make sure the target database (e.g. `bank_management` in MySQL) exists before running the app — tables are created automatically on startup via `Base.metadata.create_all`.
 
@@ -73,6 +77,30 @@ uvicorn app.main:app --reload
 ```
 
 The API will be available at `http://127.0.0.1:8000`, with interactive docs at `http://127.0.0.1:8000/docs`.
+
+## Screenshots
+
+**Running the server (VS Code)**
+
+`uvicorn app:app --reload` started from the `app/` directory, server live at `http://127.0.0.1:8000`.
+
+![VS Code showing main.py and the running Uvicorn server](images/vscode-run-server.jpeg)
+
+**`GET /customers/`** — listing customers (Postman)
+
+![Postman response for GET /customers](images/postman-list-customers.jpeg)
+
+**`GET /transactions/`** — listing transactions (Postman)
+
+![Postman response for GET /transactions](images/postman-list-transactions.jpeg)
+
+**`customers` table (MySQL Workbench)**
+
+![MySQL Workbench showing the customers table](images/db-customers-table.jpeg)
+
+**`transactions` table (MySQL Workbench)**
+
+![MySQL Workbench showing the transactions table](images/db-transactions-table.jpeg)
 
 ## API Endpoints
 
@@ -123,6 +151,10 @@ pytest test_banking_api.py -v
 | Variable       | Default                                                        | Description               |
 |----------------|-----------------------------------------------------------------|----------------------------|
 | `DATABASE_URL` | `mysql+pymysql://root:minnie@localhost:3306/bank_management`    | SQLAlchemy database URL   |
+
+## Author
+
+**Thippavathi Hemanth Kumar**
 
 ## License
 
