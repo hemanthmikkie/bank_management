@@ -63,9 +63,6 @@ mysql+pymysql://root:minnie@localhost:3306/bank_management
 
 You can override this with the `DATABASE_URL` environment variable. For example, to use SQLite instead:
 
-```bash
-export DATABASE_URL="sqlite:///./banking.db"
-```
 
 Make sure the target database (e.g. `bank_management` in MySQL) exists before running the app — tables are created automatically on startup via `Base.metadata.create_all`.
 
