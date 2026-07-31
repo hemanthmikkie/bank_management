@@ -4,7 +4,7 @@ import sys
 import pytest
 from fastapi.testclient import TestClient
 
-os.environ.setdefault("DATABASE_URL", "sqlite:///./test_banking.db")
+os.environ["DATABASE_URL"] = "sqlite:///./test_banking.db"
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
