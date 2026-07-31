@@ -9,7 +9,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 #     "DATABASE_URL",
 #     "mysql+pymysql://avnadmin:AVNS_TNgAshCoHJKnC2GQhHb@mysql-39501748-hemanthkumarthippavathi-b4e3.g.aivencloud.com:16337/defaultdb?ssl-mode=REQUIRED",
 # )
-DATABASE_URL=mysql+pymysql://avnadmin:AVNS_TNgAshCoHJKnC2GQhHb@mysql-39501748-hemanthkumarthippavathi-b4e3.g.aivencloud.com:16337/defaultdb
+DATABASE_URL="mysql+pymysql://avnadmin:AVNS_TNgAshCoHJKnC2GQhHb@mysql-39501748-hemanthkumarthippavathi-b4e3.g.aivencloud.com:16337/defaultdb"
 
 def _normalize_mysql_url(url: str) -> tuple[str, dict]:
     connect_args: dict = {}
